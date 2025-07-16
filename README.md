@@ -194,7 +194,8 @@ The Finance Tracker system follows a layered architecture to promote separation 
 Each layer communicates only with adjacent layers, allowing the system to remain modular, testable, and easier to maintain or extend.
 
 ### 5.2 Architecture Diagram
-![](/Users/nandar/Desktop/Screenshot 2025-07-16 at 10.20.10.png)
+
+![](https://drive.google.com/drive/folders/1wmN_-Dp2ujYTQOAUvlU_tYZhSZpPjOM3)
 
 
 ### 5.3 Technologies Used
