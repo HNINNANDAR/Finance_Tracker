@@ -109,7 +109,7 @@ Follows a modular **MVC** pattern with layered design.
 
 ## 📌 6. Use Case Diagram
 
-![Use Case Diagram](https://app.eraser.io/workspace/FAWyah9i9rHfhEp39JXi?origin=share&elements=uJEaA3_HmeeHzCsCm2UEXQ)
+![Use Case Diagram](https://github.com/HNINNANDAR/Finance_Tracker/blob/main/src/main/java/finance/tracker/docs/usecaseDiagram.png)
 
 ---
 
@@ -153,6 +153,15 @@ Follows a modular **MVC** pattern with layered design.
 
 ![Register](https://github.com/HNINNANDAR/Finance_Tracker/blob/main/src/main/java/finance/tracker/docs/register.png "Register")
 
+![Login](https://github.com/HNINNANDAR/Finance_Tracker/blob/main/src/main/java/finance/tracker/docs/login.png)
+
+![Dashboard](https://github.com/HNINNANDAR/Finance_Tracker/blob/main/src/main/java/finance/tracker/docs/dashboard.png)
+
+![Add Transaction](https://github.com/HNINNANDAR/Finance_Tracker/blob/main/src/main/java/finance/tracker/docs/newTransaction.png)
+
+![View Transactions](https://github.com/HNINNANDAR/Finance_Tracker/blob/main/src/main/java/finance/tracker/docs/transactions.png)
+
+![Manage Categories](https://github.com/HNINNANDAR/Finance_Tracker/blob/main/src/main/java/finance/tracker/docs/categories.png)
 ---
 
 ## 11. Installation & Deployment
@@ -214,54 +223,50 @@ This will launch the desktop GUI.
 
 ## 12. How to Use
 
-1. **Launch the Application:**  
-   Run the `MainFrame` class to start the Finance Tracker desktop app.
+1. **Launch App:**  
+   Run `MainFrame.java` to start the Finance Tracker.
 
 2. **Login or Register:**
-- If you have an account, enter your credentials on the login screen.
-- To create a new account, click the "Register" link and fill out the registration form.
+  - Existing users can log in with credentials.
+  - New users can register using the "Register" link.
 
-3. **Navigate the Dashboard:**
-- After login, use the sidebar to access **Dashboard**, **Add Transaction**, **View Transactions**, and **Categories**.
-- The dashboard shows an overview of your finances for the selected month and year.
+3. **Navigate:**  
+   Use the sidebar to access Dashboard, Add/View Transactions, and Categories.
 
-4. **Manage Transactions:**
-- Click **Add Transaction** to record income or expenses with categories and amounts.
-- Use **View Transactions** to browse, edit, or delete existing entries.
+4. **Manage Finances:**
+  - Add transactions with amount, category, and type.
+  - View, update, or delete past transactions.
 
-5. **Manage Categories:**
-- Use the **Categories** panel to add, update, or remove expense/income categories for better organization.
+5. **Customize Categories:**  
+   Create and manage custom income/expense categories.
 
-6. **Filter by Month and Year:**
-- Use the dropdown selectors at the bottom of the dashboard to filter financial data by specific months and years.
+6. **Filter by Date:**  
+   Use dropdowns to view transactions for a specific month/year.
 
-7. **Logout:**
-- Click the **Logout** button at the top-right corner to safely sign out and return to the login screen.
+7. **Logout:**  
+   Click "Logout" to securely exit the application.
 
-**Sample Test Account:**
-- Email: `test@example.com`
-- Password: `password123`
-
+**Test Account:**  
+Email: `test@example.com`  
+Password: `password123`
 
 ---
 
 ## 13. Design Justification & Principles
 
-- **Use of Interfaces and Composition:**  
-  The project uses DAO interfaces (e.g., `UserDAO`, `CategoryDAO`, `TransactionDAO`) to separate data access logic from UI and business logic. This allows easy replacement of data sources or mocking during testing. Composition is applied in UI panels by injecting DAO dependencies and callbacks, promoting loose coupling and better maintainability.
+- **Interfaces & Composition:**  
+  DAO interfaces separate UI and database logic, supporting testability and flexibility.
 
-- **Liskov Substitution Principle (LSP):**  
-  UI components like `DashboardPanel`, `AddTransactionPanel`, `ViewTransactionPanel`, and `ManageCategoryPanel` follow consistent interfaces and behavior, allowing them to be swapped or extended without breaking the main frame’s navigation or flow. This design ensures that subclasses or panel replacements maintain expected behaviors.
-
-- **Open-Closed Principle (OCP):**  
-  The application design supports adding new features without modifying existing code. For example, new transaction types or UI panels can be added by extending existing classes and registering them in the card layout, without changing the core navigation or data models. The use of functional interfaces for callbacks (e.g., refreshing dashboard after adding transactions) also adheres to OCP by allowing extension through composition.
+- **SOLID Principles:**
+  - *Liskov Substitution:* UI panels follow consistent behavior for easy replacement.
+  - *Open-Closed:* New features can be added without altering existing code.
 
 - **Design Patterns:**
-    - **DAO Pattern:** Abstracts all database operations through interfaces and concrete implementations (`UserDAO`, `CategoryDAO`, `TransactionDAO`), enabling clean separation of concerns and easy database swapping or mocking.
-    - **Observer Pattern / Callback Functions:** Panels notify others about data changes using callbacks (e.g., `AddTransactionPanel` triggers a dashboard refresh), enabling responsive UI updates without tight coupling.
-    - **CardLayout for View Management:** Manages switching between multiple UI screens (login, dashboard, add transaction, etc.) cleanly, maintaining separation of concerns and simplifying navigation logic.
+  - *DAO Pattern:* Encapsulates all database access logic.
+  - *Observer Pattern:* Panels update views via callback functions.
+  - *CardLayout:* Simplifies view navigation and screen transitions.
 
-These design choices enhance modularity, ease of testing, and future extensibility, making the Finance Tracker robust and adaptable.
+These principles ensure clean architecture, scalability, and easy maintenance.
 
 
 ---
