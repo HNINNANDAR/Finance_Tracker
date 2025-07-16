@@ -53,7 +53,7 @@ public class ViewTransactionPanel extends JPanel {
         categoryFilter = createStyledComboBox(new String[]{"All"});
         minDateField = createStyledTextField();
         maxDateField = createStyledTextField();
-        clearBtn = createStyledButton("Clear Filters", new Color(108, 117, 125));
+        clearBtn = createStyledButton("Clear", new Color(108, 117, 125));
         backButton = createStyledButton("Back", new Color(108, 117, 125));
 
         // Initialize table

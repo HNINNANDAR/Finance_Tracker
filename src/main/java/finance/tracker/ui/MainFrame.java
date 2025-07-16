@@ -24,7 +24,7 @@ import java.util.stream.IntStream;
 public class MainFrame extends JFrame {
 
     /* Constants */
-    private static final int W = 1000, H = 700;
+    private static final int W = 1200, H = 800;
     private static final Color PRIMARY = new Color(51, 153, 255);
     private static final Color BG = new Color(245, 245, 250);
 
