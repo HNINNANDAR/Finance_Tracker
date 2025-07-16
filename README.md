@@ -56,7 +56,6 @@ Describe the system from the user's perspective using user stories:
 * As a user, I want to select a specific month and year so that I can filter my transaction data.
 
 * As a user, I want to log out when I’m done so that my data remains secure.
-* ...
 
 ---
 
@@ -196,7 +195,10 @@ Each layer communicates only with adjacent layers, allowing the system to remain
 
 ### 5.2 Architecture Diagram
 
-*(Insert a diagram here)*
+- **UI**: your `MainFrame`, `DashboardPanel`, `LoginPanel`, `RegistrationPanel`,`ManageCategoryPanel`,`ViewTransactionPanel`,`AddTransactionPanel`.
+- **Service Layer**: logic inside `MainFrame`, `onLogin`, `onAddTransaction`, etc.
+- **DAO Layer**: `UserDAO`, `CategoryDAO`, `TransactionDAO`
+- **Database**: PostgreSQL Database
 
 https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.oreilly.com%2Flibrary%2Fview%2Fsoftware-architecture-patterns%2F9781491971437%2Fch01.html&psig=AOvVaw1MvFBR-hwiX6nYyg9wbaq7&ust=1752555946799000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqGAoTCMjf0OfJu44DFQAAAAAdAAAAABCEAQ<img width="1127" height="843" alt="image" src="https://github.com/user-attachments/assets/e2aa8498-ae27-4ab7-bba0-03e5223de976" />
 
