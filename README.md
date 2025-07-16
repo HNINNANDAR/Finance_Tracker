@@ -1,303 +1,157 @@
-# Course Project Report
+# Personal Finance Tracker
 
-**\[Personal Finance Tracker]**
-
-**Course:** Modern Programming Practices
-
-**Block:** July 2025
-
+**Course:** Modern Programming Practices  
+**Block:** July 2025  
 **Instructor:** Dr. Bright Gee Varghese R
 
-**Team Members:**
+**Team Member:**
+- Hnin Nandar Zaw (ID: 619564)
 
-\[Hnin Nandar Zaw]  \[619564]
-
-
-**Date of Submission:** \[07/16/2025]
+**Date of Submission:** July 16, 2025
 
 ---
 
-# Important Project Requirements
+## 🚀 Project Requirements
 
-**Stream API:**
+### ✅ Java Stream API
+Utilized for efficient collection operations—filtering, mapping, reducing, and aggregating data.
 
-You must make use of the Java Stream API wherever it is applicable, especially for collection processing, filtering, mapping, aggregation, and other data operations. Clearly highlight these usages in your code and documentation.
+### ✅ Unit Testing
+Business logic is covered using JUnit tests. Instructions for running tests are included.
 
-**Unit Testing:**
-
-Implement unit tests for your business logic using JUnit or a similar testing framework. Include instructions for running your test suite and ensure your tests cover major functionalities and edge cases.
-
-**Singleton Pattern:**
-
-Where a class should have only one instance (for example, for managing resources, database connections, configuration, etc.), apply the Singleton design pattern.
+### ✅ Singleton Pattern
+Applied where only one instance is required (e.g., `DatabaseConnector`).
 
 ---
 
-## 1. Problem Description
+## 🧩 1. Problem Description
 
-Managing personal finances can be difficult without a proper system. Many people lose track of their expenses, leading to poor budgeting and financial stress. This project solves that problem by providing a simple finance tracker where users can record, view, and categorize their transactions. It helps users become more aware of their spending and build better money habits.
-
----
-
-## 2. User Stories
-
-Describe the system from the user's perspective using user stories:
-
-* As a user, I want to register an account so that I can securely access my personal dashboard.
-
-* As a user, I want to log in to my account so that I can manage my financial records.
-
-* As a user, I want to add income and expense transactions so that I can track my spending.
-
-* As a user, I want to view my past transactions so that I can review and analyze my expenses.
-
-* As a user, I want to categorize my transactions so that I can organize my financial data.
-
-* As a user, I want to select a specific month and year so that I can filter my transaction data.
-
-* As a user, I want to log out when I’m done so that my data remains secure.
+Managing personal finances can be difficult without a structured system. This project provides a simple finance tracker to record, view, and categorize transactions. It helps users gain financial awareness and develop better money habits.
 
 ---
 
-## 3. Functional Requirements
+## 👤 2. User Stories
 
-### 1. User Registration and Authentication
-- Users can register with a unique email and password.
-- The system authenticates users during login.
-- Users can log out to end their session.
+- As a user, I want to register and log in to securely manage my data.
+- As a user, I want to add income and expenses to track my financial activities.
+- As a user, I want to view and categorize my transactions.
+- As a user, I want to filter data by month and year for easy tracking.
+- As a user, I want to securely log out after use.
+
+---
+
+## ⚙️ 3. Functional Requirements
+
+### 1. Authentication
+- Register with email and password.
+- Login and logout functionality.
 
 ### 2. Dashboard
-- Displays a personalized welcome message.
-- Shows summary data filtered by selected month and year.
+- Personalized greeting.
+- Monthly and yearly summary view.
 
 ### 3. Transaction Management
-- Users can add new transactions with details:
-    - Amount
-    - Category
-    - Type (Income or Expense)
-    - Description
-- Users can view a list of transactions.
-- Transactions can be updated or deleted.
+- Add/edit/delete transactions (amount, category, type, description).
+- View transaction history.
 
 ### 4. Category Management
-- Users can view, create, edit, and delete custom categories.
-- Categories are user-specific and not shared between users.
+- Create/edit/delete user-specific categories.
 
 ### 5. Date Filtering
-- Users can select a month and year from dropdowns.
-- Dashboard and transaction views update accordingly.
+- Filter transactions by selected month and year.
 
 ### 6. Navigation
-- Sidebar contains navigation buttons:
-    - 🏠 Dashboard
-    - ➕ Add Transaction
-    - 📋 View Transactions
-    - 🗂 Categories
-- Sidebar is only visible after login.
-- Sidebar is hidden on Login and Registration screens.
+- Sidebar with links: Dashboard, Add Transaction, View Transactions, Categories.
+- Sidebar visible only after login.
 
 ### 7. Data Persistence
-- All data (users, categories, transactions) is saved in a relational database.
-- The application reads from and writes to the database as needed.
+- All data stored in a relational database via JDBC.
 
 ---
 
-## 4. Non-Functional Requirements
+## ⚙️ 4. Non-Functional Requirements
 
-### 1. Usability
-- The application provides a simple and intuitive user interface.
-- Clear navigation through labeled buttons and icons.
-- Minimal user input required for common actions (e.g., dropdown selectors for dates).
-
-### 2. Security
-- Passwords are securely stored using hashing.
-- User authentication is required to access financial features.
-- Session control ensures secure logout behavior.
-
-### 3. Reliability
-- The application handles invalid input and database failures gracefully.
-- Error dialogs provide informative feedback to users.
-
-### 4. Performance
-- UI updates (e.g., dashboard refresh) are near-instantaneous.
-- Efficient database queries support quick loading of transactions and categories.
-
-### 5. Scalability
-- Modular design allows for easy extension of features (e.g., reporting, budget goals).
-- Supports multiple users with isolated data through user-specific queries.
-
-### 6. Maintainability
-- Codebase follows separation of concerns (UI, DAO, Model).
-- Panels and services are modular and easy to test or extend.
-
-### 7. Portability
-- Runs on any platform with Java installed.
-- No platform-specific dependencies or configurations.
+- **Usability:** Simple UI with clear navigation.
+- **Security:** Password hashing, secure session handling.
+- **Reliability:** Handles invalid input gracefully.
+- **Performance:** Fast UI and optimized DB queries.
+- **Scalability:** Modular design for future expansion.
+- **Maintainability:** Follows clean architecture and coding standards.
+- **Portability:** Platform-independent (Java-based).
 
 ---
 
-## 5. Architecture of Project
+## 🏗 5. Architecture
 
-The Finance Tracker follows a modular **MVC (Model-View-Controller)** architecture:
+Follows a modular **MVC** pattern with layered design.
 
-### 🧱 1. Model
-- Contains plain Java classes (POJOs) representing core entities like `User`, `Transaction`, and `Category`.
-- Handles data structures used throughout the app.
+### 5.1 Layer Overview
 
-### 🖥 2. View (UI Layer)
-- Built using Java Swing.
-- Panels such as `LoginPanel`, `DashboardPanel`, `AddTransactionPanel`, etc., are responsible for rendering the user interface.
-- UI components interact with the controller via listeners and callbacks.
-
-### 🧠 3. Controller / Logic
-- Business logic and interaction control are handled inside panel classes or passed as lambdas (e.g., onLoginSuccess).
-- Handles user actions, input validation, and triggers data updates.
-
-### 🗄 4. Data Access Layer (DAO)
-- Interfaces with a relational database using JDBC.
-- Classes like `UserDAO`, `TransactionDAO`, and `CategoryDAO` abstract raw SQL operations.
-- Ensures separation of database logic from UI code.
-
-### 🧩 5. Database
-- A MySQL (or similar) database holds all persistent data: users, transactions, and categories.
-- Accessed securely via the DAO layer.
-
-### 🔄 Navigation and Flow
-- Uses `CardLayout` to manage screen transitions between login, dashboard, and other panels.
-- The `MainFrame` acts as the root controller and navigator of the entire app.
-
-
-### 5.1 Overview
-
-The Finance Tracker system follows a layered architecture to promote separation of concerns and maintainability. The major layers are:
-
-#### 1. Presentation Layer (UI)
-- Built with Java Swing.
-- Handles all user interactions, input forms, buttons, and display panels.
-- Uses `CardLayout` to switch between views (e.g., Login, Dashboard, Add Transaction).
-
-#### 2. Application Logic Layer (Controller)
-- Manages interaction between the UI and the data layer.
-- Handles business rules such as login validation, transaction creation, and category management.
-- Often implemented using listeners, callbacks, and panel methods.
-
-#### 3. Data Access Layer (DAO)
-- Provides CRUD operations for accessing and modifying database records.
-- Contains DAO classes like `UserDAO`, `TransactionDAO`, and `CategoryDAO`.
-- Encapsulates all database logic using JDBC.
-
-#### 4. Database Layer
-- A relational database stores persistent data such as users, transactions, and categories.
-- Tables are mapped to Java classes (models) and accessed via the DAO layer.
-- Ensures data consistency, integrity, and long-term storage.
-
-Each layer communicates only with adjacent layers, allowing the system to remain modular, testable, and easier to maintain or extend.
+- **Presentation Layer:** Java Swing UI components (panels, forms, dashboards).
+- **Service Layer (Controller):** Handles logic and validation.
+- **DAO Layer:** Encapsulates database operations using JDBC.
+- **Database:** PostgreSQL stores persistent data (users, transactions, categories).
 
 ### 5.2 Architecture Diagram
 
-<img src="https://github.com/HNINNANDAR/Finance_Tracker/blob/main/src/main/java/finance/tracker/docs/Screenshot%202025-07-16%20at%2010.20.10.png"/>
-
+![Architecture Diagram](https://github.com/HNINNANDAR/Finance_Tracker/blob/main/src/main/java/finance/tracker/docs/architectureDiagram.png)
 
 ### 5.3 Technologies Used
 
-- **Java 24** 
-- **JDBC** 
-- **PostgreSQL** 
-- **Maven** 
-- **JUnit** 
-- **IntelliJ IDEA** 
-
-
-### 5.4 Layer Descriptions
-
-* **Presentation Layer:**  
-  Implements the user interface using Java Swing components, including dashboards, forms, and navigation. It handles user interactions such as login, transaction entry, category management, and viewing financial data.
-
-* **Service Layer:**  
-  Contains the business logic for managing users, transactions, and categories. It validates input, coordinates actions between the UI and data access layer, and manages application workflows like login/logout and data updates.
-
-* **Data Access Layer:**  
-  Uses DAO (Data Access Object) classes to perform database operations on users, transactions, and categories. This layer abstracts database queries and ensures secure, efficient CRUD operations.
-
-* **Database:**  
-  A relational database stores all persistent data such as user credentials, financial transaction records, and category information, enabling reliable data storage and retrieval across sessions.
-
+- Java 24
+- JDBC
+- PostgreSQL
+- Maven
+- JUnit
+- IntelliJ IDEA
 
 ---
 
-## 6. Use Case Diagram(s)
-<img src="https://app.eraser.io/workspace/FAWyah9i9rHfhEp39JXi?origin=share&amp;elements=uJEaA3_HmeeHzCsCm2UEXQ"/>
+## 📌 6. Use Case Diagram
 
-Insert your use case diagram(s) here (as an image or diagram link).
+![Use Case Diagram](https://app.eraser.io/workspace/FAWyah9i9rHfhEp39JXi?origin=share&elements=uJEaA3_HmeeHzCsCm2UEXQ)
 
 ---
 
-## 7. Use Case Descriptions
+## 📋 7. Use Case Descriptions
 
-### Use Case: User Login
+### User Login
 - **Actor:** Registered User
-- **Preconditions:** Account exists
-- **Postconditions:** Dashboard is shown
-- **Steps:**
-  1. Enter credentials
-  2. System verifies and logs in
+- **Steps:** Enter credentials → Authenticate → Show Dashboard
 
----
-
-### Use Case: User Registration
+### User Registration
 - **Actor:** New User
-- **Preconditions:** None
-- **Postconditions:** Account created
-- **Steps:**
-  1. Fill registration form
-  2. System saves and redirects to login
+- **Steps:** Fill registration form → Save → Redirect to login
 
----
-
-### Use Case: Add Transaction
+### Add Transaction
 - **Actor:** Logged-in User
-- **Preconditions:** User is authenticated
-- **Postconditions:** Transaction saved
-- **Steps:**
-  1. Fill transaction form
-  2. System saves and updates dashboard
+- **Steps:** Fill form → Save to DB → Update dashboard
 
----
-
-### Use Case: View Transactions
+### View Transactions
 - **Actor:** Logged-in User
-- **Preconditions:** User is authenticated
-- **Postconditions:** Transactions displayed
-- **Steps:**
-  1. Open view screen
-  2. System loads user transactions
+- **Steps:** Open view screen → Load transactions
 
----
-
-### Use Case: Manage Categories
+### Manage Categories
 - **Actor:** Logged-in User
-- **Preconditions:** User is authenticated
-- **Postconditions:** Categories updated
-- **Steps:**
-  1. Open categories screen
-  2. Add/edit/delete categories
-
+- **Steps:** Open categories → Add/Edit/Delete
 
 ---
 
-## 8. Class Diagram
+## 📦 8. Class Diagram
 
-Insert your UML class diagram image. Include key classes, their attributes, methods, relationships (associations, inheritance, interfaces, composition).
-
----
-
-## 9. Sequence Diagrams
-
-Provide sequence diagrams for important use cases.
+![Class Diagram](https://github.com/HNINNANDAR/Finance_Tracker/blob/main/src/main/java/finance/tracker/docs/classDiagram.png)
 
 ---
 
-## 10. Screenshots
+## 📈 9. Sequence Diagrams
+
+![Sequence Diagram](https://github.com/HNINNANDAR/Finance_Tracker/blob/main/src/main/java/finance/tracker/docs/sequenceDiagram.png)
+
+---
+
+## 🖼 10. Screenshots
+
+![Register](https://github.com/HNINNANDAR/Finance_Tracker/blob/main/src/main/java/finance/tracker/docs/register.png "Register")
 
 ---
 
