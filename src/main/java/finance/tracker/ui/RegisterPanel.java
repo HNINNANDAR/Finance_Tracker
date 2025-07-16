@@ -113,7 +113,7 @@ public class RegisterPanel extends JPanel {
                 return;
             }
 
-            if (service.register(username, email, password)) {
+            if (service.register(email, password, username)) {
                 showSuccess("Registration successful!");
                 goToLogin.run();
             } else {

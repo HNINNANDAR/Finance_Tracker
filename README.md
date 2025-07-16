@@ -17,7 +17,11 @@
 Utilized for efficient collection operations—filtering, mapping, reducing, and aggregating data.
 
 ### ✅ Unit Testing
-Business logic is covered using JUnit tests. Instructions for running tests are included.
+Business logic is covered using JUnit tests. 
+
+Run the following cmd to execute the test.
+
+mvn test
 
 ### ✅ Singleton Pattern
 Applied where only one instance is required (e.g., `DatabaseConnector`).
@@ -51,7 +55,7 @@ Managing personal finances can be difficult without a structured system. This pr
 - Monthly and yearly summary view.
 
 ### 3. Transaction Management
-- Add/edit/delete transactions (amount, category, type, description).
+- Add transactions (amount, category, type, description).
 - View transaction history.
 
 ### 4. Category Management
@@ -72,7 +76,7 @@ Managing personal finances can be difficult without a structured system. This pr
 ## ⚙️ 4. Non-Functional Requirements
 
 - **Usability:** Simple UI with clear navigation.
-- **Security:** Password hashing, secure session handling.
+- **Security:** Password handling, secure session handling.
 - **Reliability:** Handles invalid input gracefully.
 - **Performance:** Fast UI and optimized DB queries.
 - **Scalability:** Modular design for future expansion.

@@ -37,8 +37,7 @@ public class AddTransactionPanel extends JPanel {
         this.service = catService;
         this.transactionService = transactionService;
 //        this.transactionDAO = transactionDAO;
-        this.userId = userId;
-
+//        this.userId = userId;
         setLayout(new BorderLayout(20, 20));
         setBackground(BACKGROUND_COLOR);
         setBorder(new EmptyBorder(30, 40, 30, 40));

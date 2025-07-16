@@ -81,7 +81,12 @@ public class MainFrame extends JFrame {
 
         bar.add(makeNavBtn("🏠", "Dashboard", () -> cards.show(mainPanel, "HOME")));
         bar.addSeparator();
-        bar.add(makeNavBtn("➕", "Add Transaction", () -> cards.show(mainPanel, "ADD")));
+//        bar.add(makeNavBtn("➕", "Add Transaction", () -> cards.show(mainPanel, "ADD")));
+        bar.add(makeNavBtn("➕", "Add Transaction", () -> {
+            add.loadCategories(current.getUserId(), catService); // Refresh categories
+            cards.show(mainPanel, "ADD");
+        }));
+
         bar.addSeparator();
         bar.add(makeNavBtn("📋", "View Transactions", () -> {
             if (view != null) view.loadTransactions();
