@@ -11,7 +11,7 @@ public class WebServer {
     public static void main(String[] args) {
         port(4567);
         Gson gson = new Gson();
-        Connection conn = DatabaseConnector.connect();
+        Connection conn = DatabaseConnector.getInstance();
         TransactionDAO dao = new TransactionDAO(conn);
 
         // Test route

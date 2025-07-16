@@ -44,4 +44,9 @@ public class Category {
     public void setUserId(int userId) {
         this.userId = userId;
     }
+    @Override
+    public String toString() {
+        return categoryName; // Or format like: name + " (" + type + ")"
+    }
+
 }

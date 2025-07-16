@@ -5,23 +5,26 @@ import java.time.LocalDate;
 public class BaseTransaction implements Transaction {
     private TransactionType type;
     private double amount;
-    private String category;
+    private Category category;
     private String description;
     private LocalDate date;
+    private int userId;
 
-     BaseTransaction(TransactionType type, double amount, String category, String description, LocalDate date) {
+     public BaseTransaction(TransactionType type, double amount, Category category, String description, LocalDate date, int userId) {
         this.type = type;
         this.amount = amount;
         this.category = category;
         this.description = description;
         this.date = date;
+        this.userId = userId;
     }
 
     @Override public double getAmount() { return amount; }
-    @Override public String getCategory() { return category; }
+    @Override public Category getCategory() { return category; }
     @Override public String getDescription() { return description; }
     @Override public LocalDate getDate() { return date; }
     @Override public TransactionType getType() { return type; }
+    @Override public int getUserId() { return userId; }
 
     @Override
     public void process() {
@@ -34,7 +37,7 @@ public class BaseTransaction implements Transaction {
 
     @Override
     public boolean validate() {
-        return amount > 0 && category != null && !category.isBlank();
+        return amount > 0 && category != null && category.getCategoryId() !=0;
     }
 
     @Override

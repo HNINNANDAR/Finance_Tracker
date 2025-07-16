@@ -5,23 +5,23 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DatabaseConnector {
-    public static final String URL ="jdbc:postgresql://localhost:5432/finance_tracker";
-    public static final String USERNAME = "postgres";
-    public static final String PASSWORD = "postgres";
-    public static Connection connect(){
-        try{
-            Connection con = DriverManager.getConnection(URL,USERNAME,PASSWORD);
-            System.out.println("connected to database..");
-            return con;
+    private static final String URL = "jdbc:postgresql://localhost:5432/finance_tracker";
+    private static final String USER = "postgres";
+    private static final String PASSWORD = "postgres";
 
-        } catch (SQLException e) {
-            System.out.println("database connection failed..");
-            e.getStackTrace();
-            return null;
+    private static Connection connection = null;
+
+    private DatabaseConnector() {} // Prevent instantiation
+
+    public static Connection getInstance() {
+        if (connection == null) {
+            try {
+                connection = DriverManager.getConnection(URL, USER, PASSWORD);
+                System.out.println("✅ Connected to PostgreSQL");
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
-    }
-
-    public static void main(String[] args) {
-        connect();
+        return connection;
     }
 }

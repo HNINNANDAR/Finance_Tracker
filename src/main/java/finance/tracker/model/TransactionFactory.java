@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 public class TransactionFactory {
 
-    public static Transaction createTransaction(TransactionType type, double amount, String category, String description, LocalDate date) {
-        return new BaseTransaction(type, amount, category, description, date);
+    public static BaseTransaction createTransaction(TransactionType type, double amount, Category category, String description, LocalDate date, int userId) {
+        return new BaseTransaction(type, amount, category, description, date, userId);
     }
 }

@@ -17,7 +17,7 @@ public class Main {
         // to see how IntelliJ IDEA suggests fixing it.
         System.out.printf("Hello and welcome!");
 
-        Connection conn = DatabaseConnector.connect();
+        Connection conn = DatabaseConnector.getInstance();
         TransactionDAO dao = new TransactionDAO(conn);
 
 //        Transaction t1 = TransactionFactory.createTransaction(TransactionType.INCOME, 1500, "Salary", "August Salary", LocalDate.now());

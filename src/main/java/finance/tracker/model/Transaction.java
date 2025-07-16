@@ -4,10 +4,11 @@ import java.time.LocalDate;
 
 public interface Transaction {
     double getAmount();
-    String getCategory();
+    Category getCategory();
     String getDescription();
     LocalDate getDate();
     TransactionType getType();
+    int getUserId();
 
     void process();       // E.g., business logic
     boolean validate();   // E.g., is amount > 0, category not empty
