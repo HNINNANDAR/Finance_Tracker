@@ -2,6 +2,7 @@ package finance.tracker.repository;
 
 import com.google.gson.Gson;
 import finance.tracker.model.BaseTransaction;
+import finance.tracker.service.TransactionService;
 
 import java.sql.Connection;
 
@@ -13,6 +14,7 @@ public class WebServer {
         Gson gson = new Gson();
         Connection conn = DatabaseConnector.getInstance();
         TransactionDAO dao = new TransactionDAO(conn);
+        TransactionService service = new TransactionService(dao);
 
         // Test route
         get("/", (req, res) -> "✅ Finance Tracker Backend is running!");
@@ -29,7 +31,7 @@ public class WebServer {
                 return "Invalid transaction data.";
             }
 
-            boolean success = dao.insertTransaction(incoming);
+            boolean success = service.addTransaction(incoming);
             res.type("application/json");
             return gson.toJson(success ? "✅ Transaction saved!" : "❌ Failed to save transaction.");
         });

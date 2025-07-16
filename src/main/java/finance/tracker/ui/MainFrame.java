@@ -2,6 +2,9 @@ package finance.tracker.ui;
 
 import finance.tracker.model.User;
 import finance.tracker.repository.*;
+import finance.tracker.service.CategoryService;
+import finance.tracker.service.TransactionService;
+import finance.tracker.service.UserService;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -33,8 +36,11 @@ public class MainFrame extends JFrame {
     /* DAOs */
     private final Connection conn = DatabaseConnector.getInstance();
     private final CategoryDAO catDAO = new CategoryDAO(conn);
+    private final CategoryService catService = new CategoryService(catDAO);
     private final TransactionDAO txDAO = new TransactionDAO(conn);
+    private final TransactionService service = new TransactionService(txDAO);
     private final UserDAO userDAO = new UserDAO(conn);
+    private final UserService userService = new UserService(userDAO);
 
     /* Feature panels */
     private DashboardPanel dash;
@@ -105,13 +111,14 @@ public class MainFrame extends JFrame {
 
     /* ================= AUTHENTICATED BUILDERS ================= */
     private void initFeaturePanels() {
-        dash = new DashboardPanel(txDAO, current.getUserId());
-        add = new AddTransactionPanel(catDAO, txDAO, current.getUserId(), () -> {
+        dash = new DashboardPanel(current.getUserId(),service);
+        add = new AddTransactionPanel(catService, current.getUserId(), () -> {
             dash.refresh();
-            cards.show(mainPanel, "HOME");
-        });
-        view = new ViewTransactionPanel(txDAO, current.getUserId(), () -> cards.show(mainPanel, "HOME"));
-        cats = new ManageCategoryPanel(catDAO, current.getUserId(), () -> cards.show(mainPanel, "HOME"));
+            cards.show(mainPanel, "HOME")
+            ;
+        }, service);
+        view = new ViewTransactionPanel(service, current.getUserId(), () -> cards.show(mainPanel, "HOME"));
+        cats = new ManageCategoryPanel(catService, current.getUserId(), () -> cards.show(mainPanel, "HOME"));
     }
 
     private void buildCardsAfterLogin() {
@@ -184,7 +191,7 @@ public class MainFrame extends JFrame {
     private void buildLoginPanel() {
         // Build Login Panel with navigation to Register
         LoginPanel login = new LoginPanel(
-                userDAO,
+                userService,
                 () -> {}, // onSuccess placeholder (handled inside onLoginSuccess)
                 u -> {                     // onLoginSuccess
                     current = u;
@@ -198,7 +205,7 @@ public class MainFrame extends JFrame {
 
         // Build Register Panel with back‑to‑Login navigation
         RegisterPanel register = new RegisterPanel(
-                userDAO,
+                userService,
                 () -> cards.show(mainPanel, "LOGIN")
         );
 

@@ -1,6 +1,7 @@
 package finance.tracker.ui;
 
 import finance.tracker.repository.UserDAO;
+import finance.tracker.service.UserService;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -14,7 +15,7 @@ public class RegisterPanel extends JPanel {
     private static final int FIELD_WIDTH = 300;
     private static final int FIELD_HEIGHT = 35;
 
-    public RegisterPanel(UserDAO userDAO, Runnable goToLogin) {
+    public RegisterPanel(UserService service, Runnable goToLogin) {
         setLayout(new GridBagLayout());
         setBackground(BACKGROUND_COLOR);
         setBorder(new EmptyBorder(20, 40, 20, 40));
@@ -112,7 +113,7 @@ public class RegisterPanel extends JPanel {
                 return;
             }
 
-            if (userDAO.register(username, email, password)) {
+            if (service.register(username, email, password)) {
                 showSuccess("Registration successful!");
                 goToLogin.run();
             } else {

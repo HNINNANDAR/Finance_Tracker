@@ -4,6 +4,7 @@ package finance.tracker.ui;
 import finance.tracker.model.BaseTransaction;
 import finance.tracker.model.TransactionType;
 import finance.tracker.repository.TransactionDAO;
+import finance.tracker.service.TransactionService;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -28,7 +29,7 @@ public class DashboardPanel extends JPanel {
     private static final Color POSITIVE = new Color(46, 125, 50);
     private static final Color NEGATIVE = new Color(198, 40, 40);
 
-    private final TransactionDAO dao;
+    private TransactionService service;
     private final int userId;
     private YearMonth currentMonth;
     private final NumberFormat moneyFmt = NumberFormat.getCurrencyInstance();
@@ -39,10 +40,10 @@ public class DashboardPanel extends JPanel {
     private final JLabel netValue;
     private ChartPanel chartPanel;
 
-    public DashboardPanel(TransactionDAO dao, int userId) {
-        this.dao = dao;
+    public DashboardPanel(int userId, TransactionService service) {
         this.userId = userId;
         this.currentMonth = YearMonth.now();
+        this.service = service;
 
         // Initialize labels
         monthLabel = new JLabel();
@@ -133,8 +134,8 @@ public class DashboardPanel extends JPanel {
     }
 
     private void updateDisplayData() {
-        BigDecimal income = dao.getTotalByUserAndTypeInMonth(userId, TransactionType.INCOME, currentMonth);
-        BigDecimal expense = dao.getTotalByUserAndTypeInMonth(userId, TransactionType.EXPENSE, currentMonth);
+        BigDecimal income = service.getTotalByUserAndTypeInMonth(userId, TransactionType.INCOME, currentMonth);
+        BigDecimal expense = service.getTotalByUserAndTypeInMonth(userId, TransactionType.EXPENSE, currentMonth);
         BigDecimal net = income.subtract(expense);
 
         incomeValue.setText(moneyFmt.format(income));
@@ -147,7 +148,7 @@ public class DashboardPanel extends JPanel {
     }
 
     private void updateChart() {
-        List<BaseTransaction> transactions = dao.getAllByUser(userId).stream()
+        List<BaseTransaction> transactions = service.getAllByUser(userId).stream()
                 .filter(t -> t.getType() == TransactionType.EXPENSE)
                 .filter(t -> YearMonth.from(t.getDate()).equals(currentMonth))
                 .toList();

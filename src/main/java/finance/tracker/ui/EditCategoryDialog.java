@@ -4,6 +4,7 @@ package finance.tracker.ui;
 import finance.tracker.model.Category;
 import finance.tracker.model.TransactionType;
 import finance.tracker.repository.CategoryDAO;
+import finance.tracker.service.CategoryService;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -23,7 +24,7 @@ public class EditCategoryDialog extends JDialog {
     private final JButton saveButton;
     private final JButton cancelButton;
 
-    public EditCategoryDialog(JFrame parent, Category category, CategoryDAO categoryDAO, Runnable onCategoryUpdated) {
+    public EditCategoryDialog(JFrame parent, Category category, CategoryService service, Runnable onCategoryUpdated) {
         super(parent, "Edit Category", true);
 
         // Initialize components
@@ -51,7 +52,7 @@ public class EditCategoryDialog extends JDialog {
         setContentPane(mainPanel);
 
         // Setup event handlers
-        setupEventHandlers(category, categoryDAO, onCategoryUpdated);
+        setupEventHandlers(category, service, onCategoryUpdated);
     }
 
     private JPanel createHeaderPanel() {
@@ -134,7 +135,7 @@ public class EditCategoryDialog extends JDialog {
         return button;
     }
 
-    private void setupEventHandlers(Category category, CategoryDAO categoryDAO, Runnable onCategoryUpdated) {
+    private void setupEventHandlers(Category category, CategoryService service, Runnable onCategoryUpdated) {
         saveButton.addActionListener(e -> {
             String newName = nameField.getText().trim();
 
@@ -144,7 +145,7 @@ public class EditCategoryDialog extends JDialog {
             }
 
             category.setCategoryName(newName);
-            boolean success = categoryDAO.updateCategory(category);
+            boolean success = service.updateCategory(category);
 
             if (success) {
                 showSuccess("Category updated successfully!");

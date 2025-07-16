@@ -3,6 +3,7 @@ package finance.tracker.ui;
 
 import finance.tracker.model.Category;
 import finance.tracker.repository.CategoryDAO;
+import finance.tracker.service.CategoryService;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -20,7 +21,7 @@ public class DeleteCategoryDialog extends JDialog {
     private final JButton deleteButton;
     private final JButton cancelButton;
 
-    public DeleteCategoryDialog(JFrame parent, Category category, CategoryDAO categoryDAO, Runnable onCategoryDeleted) {
+    public DeleteCategoryDialog(JFrame parent, Category category, CategoryService service, Runnable onCategoryDeleted) {
         super(parent, "Delete Category", true);
 
         // Initialize components
@@ -46,7 +47,7 @@ public class DeleteCategoryDialog extends JDialog {
         setContentPane(mainPanel);
 
         // Setup event handlers
-        setupEventHandlers(category, categoryDAO, onCategoryDeleted);
+        setupEventHandlers(category, service, onCategoryDeleted);
     }
 
     private JPanel createHeaderPanel() {
@@ -114,9 +115,9 @@ public class DeleteCategoryDialog extends JDialog {
         return button;
     }
 
-    private void setupEventHandlers(Category category, CategoryDAO categoryDAO, Runnable onCategoryDeleted) {
+    private void setupEventHandlers(Category category, CategoryService service, Runnable onCategoryDeleted) {
         deleteButton.addActionListener(e -> {
-            boolean success = categoryDAO.deleteCategory(category.getCategoryId());
+            boolean success = service.deleteCategory(category.getCategoryId());
 
             if (success) {
                 showSuccess("Category deleted successfully!");

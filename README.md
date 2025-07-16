@@ -72,10 +72,10 @@ Describe the system from the user's perspective using user stories:
 
 ### 3. Transaction Management
 - Users can add new transactions with details:
-  - Amount
-  - Category
-  - Type (Income or Expense)
-  - Description
+    - Amount
+    - Category
+    - Type (Income or Expense)
+    - Description
 - Users can view a list of transactions.
 - Transactions can be updated or deleted.
 
@@ -89,10 +89,10 @@ Describe the system from the user's perspective using user stories:
 
 ### 6. Navigation
 - Sidebar contains navigation buttons:
-  - 🏠 Dashboard
-  - ➕ Add Transaction
-  - 📋 View Transactions
-  - 🗂 Categories
+    - 🏠 Dashboard
+    - ➕ Add Transaction
+    - 📋 View Transactions
+    - 🗂 Categories
 - Sidebar is only visible after login.
 - Sidebar is hidden on Login and Registration screens.
 
@@ -194,13 +194,8 @@ The Finance Tracker system follows a layered architecture to promote separation 
 Each layer communicates only with adjacent layers, allowing the system to remain modular, testable, and easier to maintain or extend.
 
 ### 5.2 Architecture Diagram
+![](/Users/nandar/Desktop/Screenshot 2025-07-16 at 10.20.10.png)
 
-- **UI**: your `MainFrame`, `DashboardPanel`, `LoginPanel`, `RegistrationPanel`,`ManageCategoryPanel`,`ViewTransactionPanel`,`AddTransactionPanel`.
-- **Service Layer**: logic inside `MainFrame`, `onLogin`, `onAddTransaction`, etc.
-- **DAO Layer**: `UserDAO`, `CategoryDAO`, `TransactionDAO`
-- **Database**: PostgreSQL Database
-
-https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.oreilly.com%2Flibrary%2Fview%2Fsoftware-architecture-patterns%2F9781491971437%2Fch01.html&psig=AOvVaw1MvFBR-hwiX6nYyg9wbaq7&ust=1752555946799000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqGAoTCMjf0OfJu44DFQAAAAAdAAAAABCEAQ<img width="1127" height="843" alt="image" src="https://github.com/user-attachments/assets/e2aa8498-ae27-4ab7-bba0-03e5223de976" />
 
 ### 5.3 Technologies Used
 
@@ -284,25 +279,25 @@ Detailed, step-by-step instructions for:
    Run the `MainFrame` class to start the Finance Tracker desktop app.
 
 2. **Login or Register:**
-  - If you have an account, enter your credentials on the login screen.
-  - To create a new account, click the "Register" link and fill out the registration form.
+- If you have an account, enter your credentials on the login screen.
+- To create a new account, click the "Register" link and fill out the registration form.
 
 3. **Navigate the Dashboard:**
-  - After login, use the sidebar to access **Dashboard**, **Add Transaction**, **View Transactions**, and **Categories**.
-  - The dashboard shows an overview of your finances for the selected month and year.
+- After login, use the sidebar to access **Dashboard**, **Add Transaction**, **View Transactions**, and **Categories**.
+- The dashboard shows an overview of your finances for the selected month and year.
 
 4. **Manage Transactions:**
-  - Click **Add Transaction** to record income or expenses with categories and amounts.
-  - Use **View Transactions** to browse, edit, or delete existing entries.
+- Click **Add Transaction** to record income or expenses with categories and amounts.
+- Use **View Transactions** to browse, edit, or delete existing entries.
 
 5. **Manage Categories:**
-  - Use the **Categories** panel to add, update, or remove expense/income categories for better organization.
+- Use the **Categories** panel to add, update, or remove expense/income categories for better organization.
 
 6. **Filter by Month and Year:**
-  - Use the dropdown selectors at the bottom of the dashboard to filter financial data by specific months and years.
+- Use the dropdown selectors at the bottom of the dashboard to filter financial data by specific months and years.
 
 7. **Logout:**
-  - Click the **Logout** button at the top-right corner to safely sign out and return to the login screen.
+- Click the **Logout** button at the top-right corner to safely sign out and return to the login screen.
 
 **Sample Test Account:**
 - Email: `test@example.com`
@@ -323,9 +318,9 @@ Detailed, step-by-step instructions for:
   The application design supports adding new features without modifying existing code. For example, new transaction types or UI panels can be added by extending existing classes and registering them in the card layout, without changing the core navigation or data models. The use of functional interfaces for callbacks (e.g., refreshing dashboard after adding transactions) also adheres to OCP by allowing extension through composition.
 
 - **Design Patterns:**
-  - **DAO Pattern:** Abstracts all database operations through interfaces and concrete implementations (`UserDAO`, `CategoryDAO`, `TransactionDAO`), enabling clean separation of concerns and easy database swapping or mocking.
-  - **Observer Pattern / Callback Functions:** Panels notify others about data changes using callbacks (e.g., `AddTransactionPanel` triggers a dashboard refresh), enabling responsive UI updates without tight coupling.
-  - **CardLayout for View Management:** Manages switching between multiple UI screens (login, dashboard, add transaction, etc.) cleanly, maintaining separation of concerns and simplifying navigation logic.
+    - **DAO Pattern:** Abstracts all database operations through interfaces and concrete implementations (`UserDAO`, `CategoryDAO`, `TransactionDAO`), enabling clean separation of concerns and easy database swapping or mocking.
+    - **Observer Pattern / Callback Functions:** Panels notify others about data changes using callbacks (e.g., `AddTransactionPanel` triggers a dashboard refresh), enabling responsive UI updates without tight coupling.
+    - **CardLayout for View Management:** Manages switching between multiple UI screens (login, dashboard, add transaction, etc.) cleanly, maintaining separation of concerns and simplifying navigation logic.
 
 These design choices enhance modularity, ease of testing, and future extensibility, making the Finance Tracker robust and adaptable.
 

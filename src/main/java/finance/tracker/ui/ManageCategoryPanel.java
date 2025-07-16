@@ -4,6 +4,7 @@ package finance.tracker.ui;
 import finance.tracker.model.Category;
 import finance.tracker.model.TransactionType;
 import finance.tracker.repository.CategoryDAO;
+import finance.tracker.service.CategoryService;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -20,7 +21,7 @@ public class ManageCategoryPanel extends JPanel {
     private static final Font INPUT_FONT = new Font("SansSerif", Font.PLAIN, 14);
     private static final int FIELD_HEIGHT = 35;
 
-    private final CategoryDAO categoryDAO;
+    private final CategoryService service;
     private final int userId;
     private final DefaultTableModel tableModel;
     private final JTable categoryTable;
@@ -29,8 +30,8 @@ public class ManageCategoryPanel extends JPanel {
     private final JButton addButton;
     private final JButton backButton;
 
-    public ManageCategoryPanel(CategoryDAO categoryDAO, int userId, Runnable onBack) {
-        this.categoryDAO = categoryDAO;
+    public ManageCategoryPanel(CategoryService service, int userId, Runnable onBack) {
+        this.service = service;
         this.userId = userId;
 
         // Initialize components
@@ -196,7 +197,7 @@ public class ManageCategoryPanel extends JPanel {
             }
 
             Category category = new Category(0, name, type, userId);
-            boolean success = categoryDAO.insertCategory(category);
+            boolean success = service.addCategory(category);
 
             if (success) {
                 showSuccess("Category added successfully!");
@@ -213,7 +214,7 @@ public class ManageCategoryPanel extends JPanel {
 
     public void refreshTable() {
         tableModel.setRowCount(0);
-        List<Category> categories = categoryDAO.getAllByUser(userId);
+        List<Category> categories = service.getAllByUser(userId);
         for (Category c : categories) {
             tableModel.addRow(new Object[]{
                     c.getCategoryName(),
@@ -229,14 +230,14 @@ public class ManageCategoryPanel extends JPanel {
 
         String name = (String) tableModel.getValueAt(row, 0);
         TransactionType type = (TransactionType) tableModel.getValueAt(row, 1);
-        Category category = categoryDAO.findByNameTypeAndUserId(name, type, userId);
+        Category category = service.findByNameTypeAndUserId(name, type, userId);
 
         if (category != null) {
             Frame parent = (Frame) SwingUtilities.getWindowAncestor(this);
             EditCategoryDialog dialog = new EditCategoryDialog(
                     (JFrame) parent,
                     category,
-                    categoryDAO,
+                    service,
                     this::refreshTable
             );
             dialog.setVisible(true);
@@ -248,14 +249,14 @@ public class ManageCategoryPanel extends JPanel {
 
         String name = (String) tableModel.getValueAt(row, 0);
         TransactionType type = (TransactionType) tableModel.getValueAt(row, 1);
-        Category category = categoryDAO.findByNameTypeAndUserId(name, type, userId);
+        Category category = service.findByNameTypeAndUserId(name, type, userId);
 
         if (category != null) {
             Frame parent = (Frame) SwingUtilities.getWindowAncestor(this);
             DeleteCategoryDialog dialog = new DeleteCategoryDialog(
                     (JFrame) parent,
                     category,
-                    categoryDAO,
+                    service,
                     this::refreshTable
             );
             dialog.setVisible(true);

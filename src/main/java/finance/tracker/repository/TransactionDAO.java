@@ -1,6 +1,7 @@
 package finance.tracker.repository;
 
 import finance.tracker.model.*;
+import finance.tracker.service.CategoryService;
 
 import java.math.BigDecimal;
 import java.sql.*;
@@ -12,10 +13,12 @@ import java.util.List;
 public class TransactionDAO {
     private final Connection connection;
     private final CategoryDAO categoryDAO;
+    private final CategoryService service;
 
     public TransactionDAO(Connection connection) {
         this.connection = connection;
         categoryDAO = new CategoryDAO(connection);
+        service = new CategoryService(categoryDAO);
     }
     public BigDecimal getTotalByUserAndTypeInMonth(int userId, TransactionType type, YearMonth month) {
         String sql = """
@@ -80,7 +83,7 @@ public class TransactionDAO {
                 LocalDate date = rs.getDate("date").toLocalDate();
                 int userId = rs.getInt("user_id");
 
-                Category category = categoryDAO.getById(categoryId);
+                Category category = service.getById(categoryId);
                 
                 //create transaction with factory method
                 transactions.add(TransactionFactory.createTransaction(type, amount, category, description, date, userId));
@@ -109,7 +112,7 @@ public class TransactionDAO {
                 int categoryId = rs.getInt("category_id");
                 int userIdFromDB = rs.getInt("user_id");
 
-                Category category = categoryDAO.getById(categoryId); // we added this earlier
+                Category category = service.getById(categoryId); // we added this earlier
                 transactions.add(TransactionFactory.createTransaction(type, amount, category, description, date, userIdFromDB));
             }
         } catch (SQLException e) {

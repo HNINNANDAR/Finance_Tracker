@@ -2,6 +2,7 @@ package finance.tracker.ui;
 
 import finance.tracker.model.BaseTransaction;
 import finance.tracker.repository.TransactionDAO;
+import finance.tracker.service.TransactionService;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -32,7 +33,7 @@ public class ViewTransactionPanel extends JPanel {
     private JTable table;
     private DefaultTableModel tableModel;
     private TableRowSorter<DefaultTableModel> sorter;
-    private final TransactionDAO transactionDAO;
+    private final TransactionService service;
     private int userId;
 
     // Filter components
@@ -43,8 +44,8 @@ public class ViewTransactionPanel extends JPanel {
     private final JButton clearBtn;
     private final JButton backButton;
 
-    public ViewTransactionPanel(TransactionDAO transactionDAO, int userId, Runnable onBack) {
-        this.transactionDAO = transactionDAO;
+    public ViewTransactionPanel(TransactionService service, int userId, Runnable onBack) {
+        this.service = service;
         this.userId = userId;
 
         // Initialize components first
@@ -269,7 +270,7 @@ public class ViewTransactionPanel extends JPanel {
     public void loadTransactions() {
         tableModel.setRowCount(0);
 
-        List<BaseTransaction> transactions = transactionDAO.getAllByUser(userId);
+        List<BaseTransaction> transactions = service.getAllByUser(userId);
 
         // Stream API: add rows + collect distinct category names in one pass
         Set<String> categories = transactions.stream()

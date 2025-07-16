@@ -3,7 +3,8 @@ package finance.tracker.ui;
 
 import finance.tracker.model.*;
 import finance.tracker.repository.CategoryDAO;
-import finance.tracker.repository.TransactionDAO;
+import finance.tracker.service.CategoryService;
+import finance.tracker.service.TransactionService;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -28,13 +29,14 @@ public class AddTransactionPanel extends JPanel {
     private final JSpinner dateSpinner;
     private final JButton submitBtn;
     private int userId;
-    private final CategoryDAO categoryDAO;
-    private final TransactionDAO transactionDAO;
+    private final CategoryService service;
+    private final TransactionService transactionService;
 
 
-    public AddTransactionPanel(CategoryDAO categoryDAO, TransactionDAO transactionDAO, int userId, Runnable onBack) {
-        this.categoryDAO = categoryDAO;
-        this.transactionDAO = transactionDAO;
+    public AddTransactionPanel(CategoryService catService, int userId, Runnable onBack, TransactionService transactionService) {
+        this.service = catService;
+        this.transactionService = transactionService;
+//        this.transactionDAO = transactionDAO;
         this.userId = userId;
 
         setLayout(new BorderLayout(20, 20));
@@ -214,7 +216,7 @@ public class AddTransactionPanel extends JPanel {
                     type, amount, category, description, date, userId
             );
 
-            transactionDAO.insertTransaction(transaction);
+            transactionService.addTransaction(transaction);
             showSuccess("Transaction added successfully!");
             return true;
 
@@ -243,8 +245,8 @@ public class AddTransactionPanel extends JPanel {
         dateSpinner.setValue(new java.util.Date());
     }
 
-    public void loadCategories(int userId, CategoryDAO categoryDAO) {
-        List<Category> categories = categoryDAO.getCategoriesForUser(userId);
+    public void loadCategories(int userId, CategoryService service) {
+        List<Category> categories = service.getCategoriesForUser(userId);
         categoryBox.removeAllItems();
         for (Category c : categories) {
             categoryBox.addItem(c);
@@ -253,6 +255,6 @@ public class AddTransactionPanel extends JPanel {
 
     public void setUserId(int userId) {
         this.userId = userId;
-        loadCategories(userId, categoryDAO);
+        loadCategories(userId, service);
     }
 }
