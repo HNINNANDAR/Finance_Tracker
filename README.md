@@ -195,7 +195,7 @@ Each layer communicates only with adjacent layers, allowing the system to remain
 
 ### 5.2 Architecture Diagram
 
-![](https://drive.google.com/drive/folders/1wmN_-Dp2ujYTQOAUvlU_tYZhSZpPjOM3)
+![Architecture Diagram](https://drive.google.com/drive/folders/1wmN_-Dp2ujYTQOAUvlU_tYZhSZpPjOM3)
 
 
 ### 5.3 Technologies Used
