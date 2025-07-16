@@ -195,7 +195,7 @@ Each layer communicates only with adjacent layers, allowing the system to remain
 
 ### 5.2 Architecture Diagram
 
-<img src="/Users/nandar/Documents/Finance_Tracker/FinanceTracker/src/main/java/finance/tracker/docs/Screenshot 2025-07-16 at 10.20.10.png"/>
+<img src="https://github.com/HNINNANDAR/Finance_Tracker/blob/main/src/main/java/finance/tracker/docs/Screenshot%202025-07-16%20at%2010.20.10.png"/>
 
 
 ### 5.3 Technologies Used
