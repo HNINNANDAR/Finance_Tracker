@@ -21,7 +21,9 @@ Business logic is covered using JUnit tests.
 
 Run the following cmd to execute the test.
 
+```bash
 mvn test
+```
 
 ### ✅ Singleton Pattern
 Applied where only one instance is required (e.g., `DatabaseConnector`).
