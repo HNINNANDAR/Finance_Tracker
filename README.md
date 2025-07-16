@@ -200,13 +200,12 @@ Each layer communicates only with adjacent layers, allowing the system to remain
 
 ### 5.3 Technologies Used
 
-- **Java 24** — Core programming language for the application logic and UI.
-- **Java Swing** — GUI framework used to build the desktop user interface.
-- **JDBC** — Java Database Connectivity for interacting with the relational database.
-- **PostgreSQL** (or your chosen RDBMS) — Relational database for persistent storage of users, transactions, and categories.
-- **Maven** (optional) — Build and dependency management tools.
-- **JUnit** (optional) — For unit testing the application.
-- **IntelliJ IDEA** — Popular IDEs for Java development.
+- **Java 24** 
+- **JDBC** 
+- **PostgreSQL** 
+- **Maven** 
+- **JUnit** 
+- **IntelliJ IDEA** 
 
 
 ### 5.4 Layer Descriptions
@@ -227,6 +226,7 @@ Each layer communicates only with adjacent layers, allowing the system to remain
 ---
 
 ## 6. Use Case Diagram(s)
+<img src="https://app.eraser.io/workspace/FAWyah9i9rHfhEp39JXi?origin=share&amp;elements=uJEaA3_HmeeHzCsCm2UEXQ"/>
 
 Insert your use case diagram(s) here (as an image or diagram link).
 
@@ -234,13 +234,54 @@ Insert your use case diagram(s) here (as an image or diagram link).
 
 ## 7. Use Case Descriptions
 
-Provide detailed descriptions for each use case:
+### Use Case: User Login
+- **Actor:** Registered User
+- **Preconditions:** Account exists
+- **Postconditions:** Dashboard is shown
+- **Steps:**
+  1. Enter credentials
+  2. System verifies and logs in
 
-* **Use Case Name:**
-* **Primary Actor(s):**
-* **Preconditions:**
-* **Postconditions:**
-* **Main Success Scenario:**
+---
+
+### Use Case: User Registration
+- **Actor:** New User
+- **Preconditions:** None
+- **Postconditions:** Account created
+- **Steps:**
+  1. Fill registration form
+  2. System saves and redirects to login
+
+---
+
+### Use Case: Add Transaction
+- **Actor:** Logged-in User
+- **Preconditions:** User is authenticated
+- **Postconditions:** Transaction saved
+- **Steps:**
+  1. Fill transaction form
+  2. System saves and updates dashboard
+
+---
+
+### Use Case: View Transactions
+- **Actor:** Logged-in User
+- **Preconditions:** User is authenticated
+- **Postconditions:** Transactions displayed
+- **Steps:**
+  1. Open view screen
+  2. System loads user transactions
+
+---
+
+### Use Case: Manage Categories
+- **Actor:** Logged-in User
+- **Preconditions:** User is authenticated
+- **Postconditions:** Categories updated
+- **Steps:**
+  1. Open categories screen
+  2. Add/edit/delete categories
+
 
 ---
 
@@ -258,19 +299,62 @@ Provide sequence diagrams for important use cases.
 
 ## 10. Screenshots
 
-Include relevant screenshots of your application's interface and features.
-
 ---
 
 ## 11. Installation & Deployment
 
-Detailed, step-by-step instructions for:
+### 1. Clone the Repository
 
-* Cloning the repository
-* Setting up dependencies and environment
-* Database setup (with scripts if needed)
-* Running the application (CLI/GUI/Web)
-* (Optional) Docker setup instructions
+```bash
+git clone https://github.com/HNINNANDAR/Finance_Tracker.git
+cd Finance_Tracker
+```
+
+### 2. Environment Setup
+
+Ensure the following are installed:
+
+- Java 21+
+- PostgreSQL (latest version)
+- IntelliJ IDEA / Eclipse (recommended)
+- JDBC PostgreSQL Driver (included in project libraries)
+
+### 3. Database Setup
+
+1. Open your PostgreSQL client (e.g., pgAdmin or psql).
+2. Create a new database:
+
+```sql
+CREATE DATABASE finance_tracker;
+```
+
+3. Run the schema script located in:
+
+```
+/resources/schema.sql
+```
+
+> Make sure to update your DB credentials in `DatabaseConnector.java`:
+
+```java
+DriverManager.getConnection("jdbc:postgresql://localhost:5432/finance_tracker", "your_username", "your_password");
+```
+
+### 4. Run the Application
+
+Open the project in your IDE and run the `MainFrame.java` file under:
+
+```
+src/finance/tracker/ui/MainFrame.java
+```
+
+This will launch the desktop GUI.
+
+### ✅ Notes
+
+- No Docker or web server setup required.
+- Make sure PostgreSQL is running and accessible at `localhost:5432`.
+
 
 ---
 
